@@ -1,48 +1,20 @@
-project:
-  name: Taskify
-  type: Productivity Web Application
-  description: >
-    Taskify is a productivity web app that helps students and professionals organize their work. 
-    It includes tools like a grade calculator, Pomodoro timer, AI study assistant, personal journal, 
-    and customizable settings, designed to make studying and task management easier.
+name: Welcome New Contributors
 
-branding:
-  palette:
-    - name: White
-      hex: "#FFFFFF"
-      usage: "Backgrounds, clean space, primary contrast"
-    - name: Dark Gray
-      hex: "#2C2C2C"
-      usage: "Primary text, navigation bar"
-    - name: Light Blue
-      hex: "#89CFF0"
-      usage: "Highlights, buttons, active elements"
-    - name: Soft Pink
-      hex: "#FFC0CB"
-      usage: "Secondary highlights, motivational quotes"
+on:
+  pull_request_target:
+    types: [opened]
 
-structure:
-  frontend:
-    - index.html
-    - calculator.html
-    - pomodoro.html
-    - ai-assistant.html
-    - journal.html
-    - settings.html
-    - assets/
-      - styles/
-      - scripts/
-      - images/
-  backend: []
-  docs:
-    - Taskify-Documentation.docx
-
-features:
-  core:
-    - Grade Calculator to compute academic performance
-    - Pomodoro Timer to boost focus and productivity
-    - AI Study Assistant for academic help and quick tips
-    - Journal section for daily reflections and goal tracking
-    - Settings page to customize the app (theme, notifications, etc.)
-    - Responsive design for mobile and desktop use
-
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Comment a welcome message
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: "👋 Welcome to Taskify! Thanks for contributing. We are excited to have you here! 🚀"
+          })
